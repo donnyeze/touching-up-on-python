@@ -1,23 +1,23 @@
-"""
-number guessing game.
-we will have a secret number -> 3
-user will have 2 trials to get the number
-if they do we congratulate them, if they do not we will end the game and tell them they failed
-"""
-secret_number = 3
-number_of_tries = 0
-max_tries = 2
+from question import Question
 
-while number_of_tries < max_tries:
-  user_guess = int(
-        input("Guess the secret number from 1 - 5 (you only have 2 tries): "))
+question_prompts = [
+  "What colors are apples?\n(a) Red/Green\n(b)Purple\n(c)Orange\n\n",
+  "What colors are bananas?\n(a) Teal\n(b) Magenta\n(c) Yellow\n\n",
+  "What colors are strawberries?\n(a) Yellow\n(b) Red\n(c) Blue\n\n"
+]
 
-  if user_guess == secret_number:
-    print(f"Congrats, you guessed the secret number: {secret_number}")
-    break
+questions = [
+  Question(question_prompts[0], "a"),
+  Question(question_prompts[1], "c"),
+  Question(question_prompts[2], "b"),
+]
 
-  number_of_tries += 1
-  if number_of_tries < max_tries:
-    print("Try again.")
-  else:
-    print("You could not guess the secret number. You failed.")
+def run_test(questions):
+  score = 0
+  for question in questions:
+    answer = input(question.prompt)
+    if answer == question.answer:
+      score += 1
+  print(f"You got {score}/{len(questions)} right.")
+
+run_test(questions)
